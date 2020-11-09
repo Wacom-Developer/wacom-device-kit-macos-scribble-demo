@@ -1,0 +1,3 @@
+[submodule "ScribbleDemo/Wacom"]
+	path = ScribbleDemo/Wacom
+	url = https://github.com/Wacom-Developer/wacom-device-kit-macos-api

@@ -1,0 +1,520 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		03C9D66024913F0100A9F80B /* NSAppleEventDescriptorHelperCategory.h in Headers */ = {isa = PBXBuildFile; fileRef = 03C9D65B24913F0100A9F80B /* NSAppleEventDescriptorHelperCategory.h */; };
+		03C9D66124913F0100A9F80B /* NSAppleEventDescriptorHelperCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 03C9D65C24913F0100A9F80B /* NSAppleEventDescriptorHelperCategory.m */; };
+		03C9D66224913F0100A9F80B /* TabletAEDictionary.h in Headers */ = {isa = PBXBuildFile; fileRef = 03C9D65D24913F0100A9F80B /* TabletAEDictionary.h */; };
+		03C9D66324913F0100A9F80B /* WacomTabletDriver.h in Headers */ = {isa = PBXBuildFile; fileRef = 03C9D65E24913F0100A9F80B /* WacomTabletDriver.h */; };
+		03C9D66424913F0100A9F80B /* WacomTabletDriver.m in Sources */ = {isa = PBXBuildFile; fileRef = 03C9D65F24913F0100A9F80B /* WacomTabletDriver.m */; };
+		0B8E73C40EC3B62F00E57360 /* WTView.h in Headers */ = {isa = PBXBuildFile; fileRef = F51C02A701331DBD01AA015F /* WTView.h */; };
+		0B8E73C50EC3B62F00E57360 /* PressureWinController.h in Headers */ = {isa = PBXBuildFile; fileRef = F51C02AB0133226301AA015F /* PressureWinController.h */; };
+		0B8E73C60EC3B62F00E57360 /* TabletEvents.h in Headers */ = {isa = PBXBuildFile; fileRef = F5B8854E013711BD017719EE /* TabletEvents.h */; };
+		0B8E73C70EC3B62F00E57360 /* TabletApplication.h in Headers */ = {isa = PBXBuildFile; fileRef = F5B885520137161E017719EE /* TabletApplication.h */; };
+		0B8E73C80EC3B62F00E57360 /* Wacom.h in Headers */ = {isa = PBXBuildFile; fileRef = F58366E2013AFD39017719EE /* Wacom.h */; };
+		0B8E73C90EC3B62F00E57360 /* DeviceTracker.h in Headers */ = {isa = PBXBuildFile; fileRef = F5E33988013DAF0601990792 /* DeviceTracker.h */; };
+		0B8E73CD0EC3B62F00E57360 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 29B97318FDCFA39411CA2CEA /* MainMenu.nib */; };
+		0B8E73CE0EC3B62F00E57360 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
+		0B8E73D00EC3B62F00E57360 /* TabletApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = F5B885530137161E017719EE /* TabletApplication.m */; };
+		0B8E73D10EC3B62F00E57360 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
+		0B8E73D20EC3B62F00E57360 /* WTView.m in Sources */ = {isa = PBXBuildFile; fileRef = F51C02A801331DBD01AA015F /* WTView.m */; };
+		0B8E73D30EC3B62F00E57360 /* PressureWinController.m in Sources */ = {isa = PBXBuildFile; fileRef = F51C02AC0133226301AA015F /* PressureWinController.m */; };
+		0B8E73D40EC3B62F00E57360 /* TabletEvents.m in Sources */ = {isa = PBXBuildFile; fileRef = F5B8854F013711BD017719EE /* TabletEvents.m */; };
+		0B8E73D50EC3B62F00E57360 /* DeviceTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = F5E33989013DAF0601990792 /* DeviceTracker.m */; };
+		0B8E73D80EC3B62F00E57360 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		037681B12490507E007F16F3 /* ScribbleDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ScribbleDemo.entitlements; sourceTree = "<group>"; };
+		03C9D65B24913F0100A9F80B /* NSAppleEventDescriptorHelperCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSAppleEventDescriptorHelperCategory.h; sourceTree = "<group>"; };
+		03C9D65C24913F0100A9F80B /* NSAppleEventDescriptorHelperCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSAppleEventDescriptorHelperCategory.m; sourceTree = "<group>"; };
+		03C9D65D24913F0100A9F80B /* TabletAEDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabletAEDictionary.h; sourceTree = "<group>"; };
+		03C9D65E24913F0100A9F80B /* WacomTabletDriver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WacomTabletDriver.h; sourceTree = "<group>"; };
+		03C9D65F24913F0100A9F80B /* WacomTabletDriver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WacomTabletDriver.m; sourceTree = "<group>"; };
+		0B8E73DE0EC3B62F00E57360 /* Info-ScribbleDemo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-ScribbleDemo.plist"; sourceTree = "<group>"; };
+		0B8E73DF0EC3B62F00E57360 /* ScribbleDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScribbleDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
+		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		DBC74F2523A32F8600321589 /* Base */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Base; path = Base.lproj/MainMenu.nib; sourceTree = "<group>"; };
+		DBC74F2623A32F8A00321589 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F51C02A701331DBD01AA015F /* WTView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WTView.h; sourceTree = "<group>"; };
+		F51C02A801331DBD01AA015F /* WTView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WTView.m; sourceTree = "<group>"; };
+		F51C02AB0133226301AA015F /* PressureWinController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PressureWinController.h; sourceTree = "<group>"; };
+		F51C02AC0133226301AA015F /* PressureWinController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PressureWinController.m; sourceTree = "<group>"; };
+		F58366E2013AFD39017719EE /* Wacom.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Wacom.h; sourceTree = "<group>"; };
+		F5B8854E013711BD017719EE /* TabletEvents.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TabletEvents.h; sourceTree = "<group>"; };
+		F5B8854F013711BD017719EE /* TabletEvents.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TabletEvents.m; sourceTree = "<group>"; };
+		F5B885520137161E017719EE /* TabletApplication.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TabletApplication.h; sourceTree = "<group>"; };
+		F5B885530137161E017719EE /* TabletApplication.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TabletApplication.m; sourceTree = "<group>"; };
+		F5D7FA67013ABD00017719EE /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
+		F5E33988013DAF0601990792 /* DeviceTracker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceTracker.h; sourceTree = "<group>"; };
+		F5E33989013DAF0601990792 /* DeviceTracker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceTracker.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0B8E73D70EC3B62F00E57360 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0B8E73D80EC3B62F00E57360 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		03C9D65A24913F0100A9F80B /* Wacom */ = {
+			isa = PBXGroup;
+			children = (
+				03C9D65B24913F0100A9F80B /* NSAppleEventDescriptorHelperCategory.h */,
+				03C9D65C24913F0100A9F80B /* NSAppleEventDescriptorHelperCategory.m */,
+				03C9D65D24913F0100A9F80B /* TabletAEDictionary.h */,
+				03C9D65E24913F0100A9F80B /* WacomTabletDriver.h */,
+				03C9D65F24913F0100A9F80B /* WacomTabletDriver.m */,
+			);
+			path = Wacom;
+			sourceTree = "<group>";
+		};
+		080E96DDFE201D6D7F000001 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				F5E33988013DAF0601990792 /* DeviceTracker.h */,
+				F5E33989013DAF0601990792 /* DeviceTracker.m */,
+				F51C02A701331DBD01AA015F /* WTView.h */,
+				F51C02A801331DBD01AA015F /* WTView.m */,
+				F51C02AB0133226301AA015F /* PressureWinController.h */,
+				F51C02AC0133226301AA015F /* PressureWinController.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
+				F5D7FA67013ABD00017719EE /* Carbon.framework */,
+			);
+			name = "Linked Frameworks";
+			sourceTree = "<group>";
+		};
+		1058C7A2FEA54F0111CA2CBB /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
+				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0B8E73DF0EC3B62F00E57360 /* ScribbleDemo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* Cocoa Simple */ = {
+			isa = PBXGroup;
+			children = (
+				037681B12490507E007F16F3 /* ScribbleDemo.entitlements */,
+				03C9D65A24913F0100A9F80B /* Wacom */,
+				080E96DDFE201D6D7F000001 /* Classes */,
+				F5E33987013DAE0901990792 /* Wacom Classes */,
+				29B97315FDCFA39411CA2CEA /* Other Sources */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+				0B8E73DE0EC3B62F00E57360 /* Info-ScribbleDemo.plist */,
+			);
+			name = "Cocoa Simple";
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				29B97316FDCFA39411CA2CEA /* main.m */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				29B97318FDCFA39411CA2CEA /* MainMenu.nib */,
+				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */,
+				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F5E33987013DAE0901990792 /* Wacom Classes */ = {
+			isa = PBXGroup;
+			children = (
+				F58366E2013AFD39017719EE /* Wacom.h */,
+				F5B8854E013711BD017719EE /* TabletEvents.h */,
+				F5B8854F013711BD017719EE /* TabletEvents.m */,
+				F5B885520137161E017719EE /* TabletApplication.h */,
+				F5B885530137161E017719EE /* TabletApplication.m */,
+			);
+			name = "Wacom Classes";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		0B8E73C30EC3B62F00E57360 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0B8E73C40EC3B62F00E57360 /* WTView.h in Headers */,
+				03C9D66024913F0100A9F80B /* NSAppleEventDescriptorHelperCategory.h in Headers */,
+				03C9D66224913F0100A9F80B /* TabletAEDictionary.h in Headers */,
+				03C9D66324913F0100A9F80B /* WacomTabletDriver.h in Headers */,
+				0B8E73C50EC3B62F00E57360 /* PressureWinController.h in Headers */,
+				0B8E73C60EC3B62F00E57360 /* TabletEvents.h in Headers */,
+				0B8E73C70EC3B62F00E57360 /* TabletApplication.h in Headers */,
+				0B8E73C80EC3B62F00E57360 /* Wacom.h in Headers */,
+				0B8E73C90EC3B62F00E57360 /* DeviceTracker.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		0B8E73C20EC3B62F00E57360 /* ScribbleDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0B8E73DA0EC3B62F00E57360 /* Build configuration list for PBXNativeTarget "ScribbleDemo" */;
+			buildPhases = (
+				0B8E73C30EC3B62F00E57360 /* Headers */,
+				0B8E73CC0EC3B62F00E57360 /* Resources */,
+				0B8E73CF0EC3B62F00E57360 /* Sources */,
+				0B8E73D70EC3B62F00E57360 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ScribbleDemo;
+			productName = "Cocoa Simple";
+			productReference = 0B8E73DF0EC3B62F00E57360 /* ScribbleDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1030;
+				TargetAttributes = {
+					0B8E73C20EC3B62F00E57360 = {
+						SystemCapabilities = {
+							com.apple.HardenedRuntime = {
+								enabled = 1;
+							};
+							com.apple.Sandbox = {
+								enabled = 1;
+							};
+						};
+					};
+				};
+			};
+			buildConfigurationList = 0BE8362A0EC3B624005F3D75 /* Build configuration list for PBXProject "ScribbleDemo" */;
+			compatibilityVersion = "Xcode 2.4";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 29B97314FDCFA39411CA2CEA /* Cocoa Simple */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0B8E73C20EC3B62F00E57360 /* ScribbleDemo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0B8E73CC0EC3B62F00E57360 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0B8E73CD0EC3B62F00E57360 /* MainMenu.nib in Resources */,
+				0B8E73CE0EC3B62F00E57360 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0B8E73CF0EC3B62F00E57360 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0B8E73D00EC3B62F00E57360 /* TabletApplication.m in Sources */,
+				0B8E73D10EC3B62F00E57360 /* main.m in Sources */,
+				0B8E73D20EC3B62F00E57360 /* WTView.m in Sources */,
+				0B8E73D30EC3B62F00E57360 /* PressureWinController.m in Sources */,
+				03C9D66124913F0100A9F80B /* NSAppleEventDescriptorHelperCategory.m in Sources */,
+				03C9D66424913F0100A9F80B /* WacomTabletDriver.m in Sources */,
+				0B8E73D40EC3B62F00E57360 /* TabletEvents.m in Sources */,
+				0B8E73D50EC3B62F00E57360 /* DeviceTracker.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		089C165CFE840E0CC02AAC07 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DBC74F2623A32F8A00321589 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		29B97318FDCFA39411CA2CEA /* MainMenu.nib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DBC74F2523A32F8600321589 /* Base */,
+			);
+			name = MainMenu.nib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		0B8E73DB0EC3B62F00E57360 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_ENTITLEMENTS = ScribbleDemo.entitlements;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_HARDENED_RUNTIME = YES;
+				FRAMEWORK_SEARCH_PATHS = "";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = "Info-ScribbleDemo.plist";
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = ScribbleDemo;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+				WRAPPER_EXTENSION = app;
+				ZERO_LINK = YES;
+			};
+			name = Development;
+		};
+		0B8E73DC0EC3B62F00E57360 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_ENTITLEMENTS = ScribbleDemo.entitlements;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				FRAMEWORK_SEARCH_PATHS = "";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = "Info-ScribbleDemo.plist";
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = ScribbleDemo;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+				WRAPPER_EXTENSION = app;
+				ZERO_LINK = NO;
+			};
+			name = Deployment;
+		};
+		0B8E73DD0EC3B62F00E57360 /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_ENTITLEMENTS = ScribbleDemo.entitlements;
+				ENABLE_HARDENED_RUNTIME = YES;
+				FRAMEWORK_SEARCH_PATHS = "";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = "Info-ScribbleDemo.plist";
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = ScribbleDemo;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+				WRAPPER_EXTENSION = app;
+			};
+			name = Default;
+		};
+		0BE8362B0EC3B624005F3D75 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				VALID_ARCHS = x86_64;
+			};
+			name = Development;
+		};
+		0BE8362C0EC3B624005F3D75 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				SDKROOT = macosx;
+				VALID_ARCHS = x86_64;
+			};
+			name = Deployment;
+		};
+		0BE8362D0EC3B624005F3D75 /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				SDKROOT = macosx;
+				VALID_ARCHS = x86_64;
+			};
+			name = Default;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0B8E73DA0EC3B62F00E57360 /* Build configuration list for PBXNativeTarget "ScribbleDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0B8E73DB0EC3B62F00E57360 /* Development */,
+				0B8E73DC0EC3B62F00E57360 /* Deployment */,
+				0B8E73DD0EC3B62F00E57360 /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+		0BE8362A0EC3B624005F3D75 /* Build configuration list for PBXProject "ScribbleDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0BE8362B0EC3B624005F3D75 /* Development */,
+				0BE8362C0EC3B624005F3D75 /* Deployment */,
+				0BE8362D0EC3B624005F3D75 /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}
