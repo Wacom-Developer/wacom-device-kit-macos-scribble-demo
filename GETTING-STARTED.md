@@ -10,7 +10,6 @@ In order to run a sample application, it is necessary to install a Wacom tablet 
 
 Once the driver has installed, and you have rebooted your system, check your tablet driver installation by doing the following:
 
-1. Download the LINK [Driver Request Interface download]() and place the "Wacom" folder in the same place as the ScribbleDemo folder.
 1. Attach one of the supported Wacom tablets. 
 1. Either open the Wacom Tablet System Preferences, or the Wacom Desktop Center to determine if your tablet is recognized by the driver.
 1. Use a tablet pen to see if you can move the system cursor.
