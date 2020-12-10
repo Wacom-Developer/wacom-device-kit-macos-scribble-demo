@@ -26,11 +26,11 @@ To build the sample application:
 ## See Also
 The Driver Request Interface developer documentation has complete API details:
 
-[Driver Request Interface - Basics](https://developer-docs.wacom.com/wacom-device-api/docs/dri-basics)
+[Driver Request Interface - Basics](https://developer-docs.wacom.com/intuos-cintiq-business-tablets/docs/dri-basics)
 
-[Driver Request Interface - Reference](https://developer-docs.wacom.com/wacom-device-api/docs/dri-reference)
+[Driver Request Interface - Reference](https://developer-docs.wacom.com/intuos-cintiq-business-tablets/docs/dri-reference)
 
-[Driver Request Interface - FAQs](https://developer-docs.wacom.com/wacom-device-api/docs/dri-faqs)
+[Driver Request Interface - FAQs](https://developer-docs.wacom.com/intuos-cintiq-business-tablets/docs/dri-faqs)
 
 ## Where to get help
 If you have questions about the sample application or any of the setup process, please visit our Support page at: https://developer.wacom.com/developer-dashboard/support 
