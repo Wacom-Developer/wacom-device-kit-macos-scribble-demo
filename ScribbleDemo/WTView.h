@@ -1,45 +1,45 @@
-///////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////
 //
 // DESCRIPTION
-// 	Header file for WTView class.
+//     Header file for WTView class.
 //
 // COPYRIGHT
 //    Copyright (c) 2001 - 2020 Wacom Co., Ltd.
 //    All rights reserved
 //
-///////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////
 
 #import <AppKit/AppKit.h>
 #import "DeviceTracker.h"
 
 @interface WTView : NSImageView
 {
-		int		mEventType;
-		UInt16	mDeviceID;
-		float		mMouseX;
-		float		mMouseY;
-		float		mSubX;
-		float		mSubY;
-		float		mPressure;
-		float		mTabletRawPressure;
-		float		mTabletScaledPressure;
-		SInt32	mAbsX;
-		SInt32	mAbsY;
-		float		mTiltX;
-		float		mTiltY;
-		float		mRotDeg;
-		float		mRotRad;
+      int       mEventType;
+      UInt16    mDeviceID;
+      float     mMouseX;
+      float     mMouseY;
+      float     mSubX;
+      float     mSubY;
+      float     mPressure;
+      float     mTabletRawPressure;
+      float     mTabletScaledPressure;
+      SInt32    mAbsX;
+      SInt32    mAbsY;
+      float     mTiltX;
+      float     mTiltY;
+      float     mRotDeg;
+      float     mRotRad;
 
-		DeviceTracker* knownDevices;
-		BOOL		mAdjustOpacity;
-		BOOL		mAdjustSize;
-		BOOL		mCaptureMouseMoves;
-		BOOL		mUpdateStatsDuringDrag;
-	
-	@private
-		BOOL		mErasing;
-		NSPoint	mLastLoc;
-		NSPoint	mSecondLoc;
+      DeviceTracker* knownDevices;
+      BOOL      mAdjustOpacity;
+      BOOL      mAdjustSize;
+      BOOL      mCaptureMouseMoves;
+      BOOL      mUpdateStatsDuringDrag;
+    
+    @private
+      BOOL       mErasing;
+      NSPoint    mLastLoc;
+      NSPoint    mSecondLoc;
 }
 
 - (int) mEventType;
@@ -73,7 +73,7 @@
 
 - (void) handleMouseEvent:(NSEvent *)theEvent_I;
 - (void) handleProximity:(NSNotification *)proxNotice_I;
-- (void) drawCurrentDataFromEvent:(NSEvent *)theEvent_I;
+- (void) drawDataFromQueue:(NSMutableArray*)eventQueue_IO;
 
 @end
 

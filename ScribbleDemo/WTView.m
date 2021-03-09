@@ -1,13 +1,16 @@
-///////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////
 //
 // DESCRIPTION
 // 	Implementation file for WTView class.
 //
+//		This is not intended to be production code. Please do not copy directly
+//		from this sample.
+//
 // COPYRIGHT
-//    Copyright (c) 2001 - 2020 Wacom Co., Ltd.
+//    Copyright (c) 2001 - 2021 Wacom Co., Ltd.
 //    All rights reserved
 //
-///////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////
 
 #import "WTView.h"
 
@@ -38,21 +41,22 @@ NSString *WTViewUpdatedNotification = @"WTViewStatsUpdatedNotification";
     return self;
 }
 
-///////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////
 
 - (void) awakeFromNib
 {
    //Must register to be notified when device goes in and out of Prox
    [[NSNotificationCenter defaultCenter] addObserver:self
-               selector:@selector(handleProximity:)
-               name:kProximityNotification
-               object:nil];
+                                          selector:@selector(handleProximity:)
+                                          name:kProximityNotification
+                                          object:nil];
 }
 
-///////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////
 
 - (void) mouseDown:(NSEvent *)theEvent_I
 {
+   [NSEvent setMouseCoalescingEnabled:NO];
    [self handleMouseEvent:theEvent_I];
    
    // Save the location the mouse down occurred at. This will be used by the
@@ -61,67 +65,78 @@ NSString *WTViewUpdatedNotification = @"WTViewStatsUpdatedNotification";
                   fromView:nil];
 }
 
-///////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////
 
 - (void)mouseDragged:(NSEvent *)theEvent_I
 {
    BOOL keepOn = YES;
 
-	if ([theEvent_I isTabletPointerEvent])
-	{
-		if ([theEvent_I deviceID] != [[knownDevices currentDevice] ident])
-		{
-			// The deviceID the event came from does not match the deviceID of
-			// the device that was thought to be on the Tablet. Must have
-			// missed a Proximity Notification. Get the Tablet to resend it.
-			
-			[WacomTabletDriver resendLastTabletEventOfType:eEventProximity];
-			return;
-		}
-	}
-   
-   // Updating the text display of the stats can take up a lot of time.
-   // This can lead to less smooth curves being drawn. Toggle the
-   // Update Stats During Drag menu option to see the difference.  
-   if(mUpdateStatsDuringDrag)
+   if ([theEvent_I isTabletPointerEvent])
    {
-      [self drawCurrentDataFromEvent:theEvent_I];
-      [self handleMouseEvent:theEvent_I];
-   }
-   else //Smoother Drawing
-   {
-      // This portion of code was copied almost verbatim from Apple's
-      // Documentation on NSView.
-      while (keepOn)
+      if ([theEvent_I deviceID] != [[knownDevices currentDevice] ident])
       {
-			theEvent_I = [[self window] nextEventMatchingMask:NSEventMaskLeftMouseUp |
-							NSEventMaskLeftMouseDragged];
-         
-         switch ([theEvent_I type])
+         // The deviceID the event came from does not match the deviceID of
+         // the device that was thought to be on the Tablet. Must have
+         // missed a Proximity Notification. Get the Tablet to resend it.
+
+         // With coalescing off, this should never happen
+
+         [WacomTabletDriver resendLastTabletEventOfType:eEventProximity];
+         return;
+      }
+   }
+
+   NSMutableArray *eventQueue = [NSMutableArray array];
+   [eventQueue addObject:[theEvent_I copy]];
+   while (keepOn)
+   {
+      theEvent_I = [[self window] nextEventMatchingMask:NSEventMaskLeftMouseUp |
+                    NSEventMaskLeftMouseDragged];
+
+      switch ([theEvent_I type])
+      {
+         case NSEventTypeLeftMouseDragged:
          {
-				case NSEventTypeLeftMouseDragged:
-				{
-               [self drawCurrentDataFromEvent:theEvent_I];
-            	break;
-            }
-					
-				case NSEventTypeLeftMouseUp:
-				{
-               keepOn = NO;
-            	break;
-            }
-					
-            default:
+            // Add the event to the queue
+            [eventQueue addObject:[theEvent_I copy]];
+            if (eventQueue.count >= 10)
             {
-					/* Ignore any other kind of event. */
-            	break;
-				}
+               // We want to give the user some feedback, so every ten events
+               // we'll update the screen
+               if(mUpdateStatsDuringDrag)
+               {
+                  [self handleMouseEvent:theEvent_I];
+               }
+               [self drawDataFromQueue:eventQueue];
+            }
+            break;
+         }
+
+         case NSEventTypeLeftMouseUp:
+         {
+            if (eventQueue.count != 0)
+            {
+               // All done, make sure we update the screen with anything left in the queue
+               [self drawDataFromQueue:eventQueue];
+            }
+
+            [NSEvent setMouseCoalescingEnabled:YES];
+
+            keepOn = NO;
+
+            break;
+         }
+
+         default:
+         {
+            /* Ignore any other kind of event. */
+            break;
          }
       }
    }
 }
 
-///////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////
 
 - (void)mouseMoved:(NSEvent *)theEvent_I
 {
@@ -141,14 +156,16 @@ NSString *WTViewUpdatedNotification = @"WTViewStatsUpdatedNotification";
    [self handleMouseEvent:theEvent_I];
 }
 
-///////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////
 
 - (void)mouseUp:(NSEvent *)theEvent_I
 {
+    [NSEvent setMouseCoalescingEnabled:YES];
+
     [self handleMouseEvent:theEvent_I];
 }
 
-///////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////
 
 // All of the Mouse Events are funneled through this function so that we
 // do not have to duplicate this code. If you do something like this,
@@ -195,7 +212,7 @@ NSString *WTViewUpdatedNotification = @"WTViewStatsUpdatedNotification";
 	[[NSNotificationCenter defaultCenter] postNotificationName:WTViewUpdatedNotification object: self];
 }
 
-///////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////
 
 // The proximity notification is based on the Proximity Event.
 // The proximity notification will give you detailed
@@ -248,58 +265,74 @@ NSString *WTViewUpdatedNotification = @"WTViewStatsUpdatedNotification";
    }
 }
 
-///////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////
 
 // This is where the pretty colors are drawn to the screen!
 // A 'Real' app would probably keep track of this information so that the
 // - (void) drawRect; function can properly re-draw it.
 
-- (void) drawCurrentDataFromEvent:(NSEvent *)theEvent_I
+- (void) drawDataFromQueue:(NSMutableArray*)eventQueue_IO
 {
-	NSPoint currentLoc = [self convertPoint:[theEvent_I locationInWindow] fromView:nil];
-	float pressure = [theEvent_I pressure];
-	float opacity = mAdjustOpacity ? pressure : 1.0;
-	float brushSize = mAdjustSize ? (pressure * maxBrushSize) : (0.5 * maxBrushSize);
+    Transducer *currentDevice = [knownDevices currentDevice];
+    CGFloat    bounds[4];
+    
+    bounds[NSRectEdgeMinX] = mLastLoc.x;
+    bounds[NSRectEdgeMinY] = mLastLoc.y;
+    bounds[NSRectEdgeMaxX] = mLastLoc.x;
+    bounds[NSRectEdgeMaxY] = mLastLoc.y;
 
-	[self.image lockFocus];
-	{
-      if (mErasing)
-      {
-         [[[NSColor whiteColor] colorWithAlphaComponent:opacity] set];
-      }
-      else
-      {
-         Transducer *currentDevice = [knownDevices currentDevice];
-         if (currentDevice != NULL)
-         {
-            [[[currentDevice color] colorWithAlphaComponent:opacity] set];
-         }
-         else
-         {
-            [[[NSColor blackColor] colorWithAlphaComponent:opacity] set];
-         }
-      }
+    [self.image lockFocus];
+    {
+        NSBezierPath *path = [NSBezierPath bezierPath];
+        [path setLineCapStyle:NSRoundLineCapStyle];
+        [path moveToPoint:mLastLoc];
 
-		NSBezierPath *path = [NSBezierPath bezierPath];
-		[path setLineWidth:brushSize];
-		[path setLineCapStyle:NSRoundLineCapStyle];
-		[path moveToPoint:mLastLoc];
-		[path lineToPoint:currentLoc];
-		[path stroke];
-	}
-	[self.image unlockFocus];
+        while (eventQueue_IO.count > 0)
+        {
+            NSEvent    *theEvent = eventQueue_IO.firstObject;
+            NSPoint    currentLoc = [self convertPoint:[theEvent locationInWindow] fromView:nil];
+            double pressure = round([theEvent pressure] * 1000.0) / 1000.0;
+            
+            double opacity = mAdjustOpacity ? pressure : 1.0;
+            double brushSize = mAdjustSize ? (pressure * maxBrushSize) : (0.5 * maxBrushSize);
 
-	NSRect rectDraw = NSMakeRect(MIN(mLastLoc.x, currentLoc.x), MIN(mLastLoc.y, currentLoc.y), fabs(mLastLoc.x - currentLoc.x), fabs(mLastLoc.y - currentLoc.y));
-	rectDraw.origin.x -= (maxBrushSize / 2.0);
-	rectDraw.origin.y -= (maxBrushSize / 2.0);
-	rectDraw.size.width += maxBrushSize;
-	rectDraw.size.height += maxBrushSize;
-	[self setNeedsDisplayInRect:rectDraw];
-   
-   mLastLoc = currentLoc;
+            if (mErasing)
+            {
+                [[[NSColor whiteColor] colorWithAlphaComponent:opacity] set];
+            }
+            else
+            {
+                if (currentDevice != NULL)
+                {
+                    [[[currentDevice color] colorWithAlphaComponent:opacity] set];
+                }
+                else
+                {
+                    [[[NSColor blackColor] colorWithAlphaComponent:opacity] set];
+                }
+            }
+
+            [path setLineWidth:brushSize];
+            [path lineToPoint:currentLoc];
+            
+            bounds[NSRectEdgeMinX] = MIN(bounds[NSRectEdgeMinX], currentLoc.x);
+            bounds[NSRectEdgeMinY] = MIN(bounds[NSRectEdgeMinY], currentLoc.y);
+            bounds[NSRectEdgeMaxX] = MAX(bounds[NSRectEdgeMaxX], currentLoc.x);
+            bounds[NSRectEdgeMaxY] = MAX(bounds[NSRectEdgeMaxY], currentLoc.y);
+
+            mLastLoc = currentLoc;
+            [eventQueue_IO removeObjectAtIndex:0];
+        }
+        [path stroke];
+    }
+    [self.image unlockFocus];
+
+    NSRect rectDraw = NSMakeRect(bounds[NSRectEdgeMinX] - (maxBrushSize / 2.0), bounds[NSRectEdgeMinY] - (maxBrushSize / 2.0),
+                                          bounds[NSRectEdgeMaxX] - bounds[NSRectEdgeMinX] + maxBrushSize, bounds[NSRectEdgeMaxY] - bounds[NSRectEdgeMinY] + maxBrushSize);
+    [self setNeedsDisplayInRect:rectDraw];
 }
 
-///////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////
 
 // A 'Real' app would probably keep track of the drawing information done
 // during Mouse Drags so that it can properly be re-drawn here. I just
@@ -323,7 +356,7 @@ NSString *WTViewUpdatedNotification = @"WTViewStatsUpdatedNotification";
 	[super drawRect:rect_I];
 }
 
-///////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////
 
 - (BOOL)isOpaque
 {
@@ -331,7 +364,7 @@ NSString *WTViewUpdatedNotification = @"WTViewStatsUpdatedNotification";
     return YES;
 }
 
-///////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////
 
 - (BOOL)acceptsFirstResponder
 {
@@ -340,7 +373,7 @@ NSString *WTViewUpdatedNotification = @"WTViewStatsUpdatedNotification";
     return YES;
 }
 
-///////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////
 
 - (BOOL)becomeFirstResponder
 {
@@ -353,112 +386,112 @@ NSString *WTViewUpdatedNotification = @"WTViewStatsUpdatedNotification";
    return YES;
 }
 
-///////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////
 
 - (int) mEventType
 {
     return mEventType;
 }
 
-///////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////
 
 - (UInt16) mDeviceID
 {
     return mDeviceID;
 }
 
-///////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////
 
 - (float) mMouseX
 {
     return mMouseX;
 }
 
-///////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////
 
 - (float) mMouseY
 {
     return mMouseY;
 }
 
-///////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////
 
 - (float) mSubX
 {
     return mSubX;
 }
 
-///////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////
 
 - (float) mSubY
 {
     return mSubY;
 }
 
-///////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////
 
 - (float) mPressure
 {
     return mPressure;
 }
 
-///////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////
 
 - (float) mTabletRawPressure
 {
     return mTabletRawPressure;
 }
 
-///////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////
 
 - (float) mTabletScaledPressure
 {
     return mTabletScaledPressure;
 }
 
-///////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////
 
 - (SInt32) mAbsX
 {
     return mAbsX;
 }
 
-///////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////
 
 - (SInt32) mAbsY
 {
     return mAbsY;
 }
 
-///////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////
 
 - (float) mTiltX
 {
     return mTiltX;
 }
 
-///////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////
 
 - (float) mTiltY
 {
     return mTiltY;
 }
 
-///////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////
 
 - (float) mRotDeg
 {
     return mRotDeg;
 }
 
-///////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////
 
 - (float) mRotRad
 {
     return mRotRad;
 }
 
-///////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////
 
 - (NSColor *) mForeColor
 {
@@ -472,7 +505,7 @@ NSString *WTViewUpdatedNotification = @"WTViewStatsUpdatedNotification";
    return [NSColor blackColor];
 }
 
-///////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////
 
 - (void) setForeColor:(NSColor *)newColor_I
 {
@@ -484,42 +517,42 @@ NSString *WTViewUpdatedNotification = @"WTViewStatsUpdatedNotification";
    }
 }
 
-///////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////
 
 - (BOOL) mAdjustOpacity
 {
    return mAdjustOpacity;
 }
 
-///////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////
 
 - (void) setAdjustOpacity:(BOOL)adjust_I
 {
    mAdjustOpacity = adjust_I;
 }
 
-///////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////
 
 - (BOOL) mAdjustSize
 {
    return mAdjustSize;
 }
 
-///////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////
 
 - (void) setAdjustSize:(BOOL)adjust_I
 {
    mAdjustSize = adjust_I;
 }
 
-///////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////
 
 - (BOOL) mCaptureMouseMoves
 {
    return mCaptureMouseMoves;
 }
 
-///////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////
 
 - (void) setCaptureMouseMoves:(BOOL)value_I
 {
@@ -527,14 +560,14 @@ NSString *WTViewUpdatedNotification = @"WTViewStatsUpdatedNotification";
    [[self window] setAcceptsMouseMovedEvents:mCaptureMouseMoves];
 }
 
-///////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////
 
 - (BOOL) mUpdateStatsDuringDrag
 {
    return mUpdateStatsDuringDrag;
 }
 
-///////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////
 
 - (void) setUpdateStatsDuringDrag:(BOOL)value_I
 {
