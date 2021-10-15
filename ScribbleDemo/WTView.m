@@ -56,84 +56,71 @@ NSString *WTViewUpdatedNotification = @"WTViewStatsUpdatedNotification";
 
 - (void) mouseDown:(NSEvent *)theEvent_I
 {
-   [NSEvent setMouseCoalescingEnabled:NO];
    [self handleMouseEvent:theEvent_I];
    
    // Save the location the mouse down occurred at. This will be used by the
    // Drawing code during a Drag event to follow.
    mLastLoc = [self convertPoint:[theEvent_I locationInWindow]
                   fromView:nil];
-}
 
-// /////////////////////////////////////////////////////////////////////////////
+	if ([theEvent_I type] == NSEventTypeLeftMouseDown)
+	{
+		BOOL keepOn = YES;
+		[NSEvent setMouseCoalescingEnabled:NO];
 
-- (void)mouseDragged:(NSEvent *)theEvent_I
-{
-   BOOL keepOn = YES;
+		NSMutableArray *eventQueue = [NSMutableArray array];
+		[eventQueue addObject:[theEvent_I copy]];
+		while (keepOn)
+		{
+			theEvent_I = [[self window] nextEventMatchingMask:NSEventMaskLeftMouseUp |
+							  NSEventMaskLeftMouseDragged];
 
-   if ([theEvent_I isTabletPointerEvent])
-   {
-      if ([theEvent_I deviceID] != [[knownDevices currentDevice] ident])
-      {
-         // The deviceID the event came from does not match the deviceID of
-         // the device that was thought to be on the Tablet. Must have
-         // missed a Proximity Notification. Get the Tablet to resend it.
+			switch ([theEvent_I type])
+			{
+				case NSEventTypeLeftMouseDragged:
+				{
+					// Add the event to the queue
+					[eventQueue addObject:[theEvent_I copy]];
+					if (eventQueue.count >= 10)
+					{
+						// We want to give the user some feedback, so every ten events
+						// we'll update the screen
+						if(mUpdateStatsDuringDrag)
+						{
+							[self handleMouseEvent:theEvent_I];
+						}
+						[self drawDataFromQueue:eventQueue];
+					}
+					break;
+				}
 
-         // With coalescing off, this should never happen
+				case NSEventTypeLeftMouseUp:
+				{
+					if (eventQueue.count != 0)
+					{
+						// All done, make sure we update the screen with anything left in the queue
+						[self drawDataFromQueue:eventQueue];
+					}
+					if(mUpdateStatsDuringDrag)
+					{
+						[self handleMouseEvent:theEvent_I];
+					}
 
-         [WacomTabletDriver resendLastTabletEventOfType:eEventProximity];
-         return;
-      }
-   }
+					[NSEvent setMouseCoalescingEnabled:YES];
 
-   NSMutableArray *eventQueue = [NSMutableArray array];
-   [eventQueue addObject:[theEvent_I copy]];
-   while (keepOn)
-   {
-      theEvent_I = [[self window] nextEventMatchingMask:NSEventMaskLeftMouseUp |
-                    NSEventMaskLeftMouseDragged];
+					keepOn = NO;
 
-      switch ([theEvent_I type])
-      {
-         case NSEventTypeLeftMouseDragged:
-         {
-            // Add the event to the queue
-            [eventQueue addObject:[theEvent_I copy]];
-            if (eventQueue.count >= 10)
-            {
-               // We want to give the user some feedback, so every ten events
-               // we'll update the screen
-               if(mUpdateStatsDuringDrag)
-               {
-                  [self handleMouseEvent:theEvent_I];
-               }
-               [self drawDataFromQueue:eventQueue];
-            }
-            break;
-         }
+					break;
+				}
 
-         case NSEventTypeLeftMouseUp:
-         {
-            if (eventQueue.count != 0)
-            {
-               // All done, make sure we update the screen with anything left in the queue
-               [self drawDataFromQueue:eventQueue];
-            }
-
-            [NSEvent setMouseCoalescingEnabled:YES];
-
-            keepOn = NO;
-
-            break;
-         }
-
-         default:
-         {
-            /* Ignore any other kind of event. */
-            break;
-         }
-      }
-   }
+				default:
+				{
+					/* Ignore any other kind of event. */
+					break;
+				}
+			}
+		}
+	}
 }
 
 // /////////////////////////////////////////////////////////////////////////////
@@ -283,9 +270,10 @@ NSString *WTViewUpdatedNotification = @"WTViewStatsUpdatedNotification";
 
     [self.image lockFocus];
     {
-        NSBezierPath *path = [NSBezierPath bezierPath];
-        [path setLineCapStyle:NSRoundLineCapStyle];
-        [path moveToPoint:mLastLoc];
+		NSBezierPath *path = [NSBezierPath bezierPath];
+		[path setLineCapStyle:NSRoundLineCapStyle];
+		[path setLineJoinStyle:NSLineJoinStyleRound];
+		[path moveToPoint:mLastLoc];
 
         while (eventQueue_IO.count > 0)
         {
