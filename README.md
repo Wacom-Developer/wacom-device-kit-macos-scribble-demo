@@ -15,9 +15,9 @@ You can download the ScribbleDemo sample code and view the inline comments to fi
 ## See Also
 The Driver Request Interface developer documentation has complete API details:
 
-[Driver Request Interface - Basics](https://developer-docs.wacom.com/intuos-cintiq-business-tablets/docs/dri-basics)
+[Driver Request Interface - Basics](https://developer-docs.wacom.com/docs/icbt/macos/dri/dri-basics/)
 
-[Driver Request Interface - Reference](https://developer-docs.wacom.com/intuos-cintiq-business-tablets/docs/dri-reference)
+[Driver Request Interface - Reference](https://developer-docs.wacom.com/docs/icbt/macos/dri/dri-reference/)
 
 [Driver Request Interface - FAQs](https://developer-support.wacom.com/hc/en-us/articles/12845119756055-Driver-Request-Interface)
 
