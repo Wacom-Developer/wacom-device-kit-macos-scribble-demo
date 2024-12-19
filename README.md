@@ -7,7 +7,7 @@ To run these applications, a Wacom tablet driver must be installed and a Scribbl
 
 
 ## Application Details
-The application uses the functions described in the [Driver Request Interface - Reference](https://developer-docs.wacom.com/intuos-cintiq-business-tablets/docs/dri-reference)
+The application uses the functions described in the [Driver Request Interface - Reference](https://developer-docs.wacom.com/docs/icbt/macos/dri/dri-reference/)
  documentation to communicate with the tablet driver. Data from the tablet arrives in standard Cocoa NSEvent's. If the driver is not functioning or is not installed, you will still be able to draw in ScribbleDemo with the mouse or other pointing device but you will not have pressure information from the Wacom tablet.
 
 You can download the ScribbleDemo sample code and view the inline comments to find out detailed information about the sample code itself.
